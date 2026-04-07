@@ -48,6 +48,11 @@ export const updateTodos = async (id:number, payload:UpdateTodoPayload)=> {
     return res.data;    
 }
 
+export const updateTodo = async (id: number, payload: UpdateTodoPayload) => {
+	const res = await axios.patch<Todo>(BASE_URL + "/todos/" + id, payload);
+	return res.data;
+}
+
 /**
  * Delete a todo
  */
