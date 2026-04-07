@@ -1,4 +1,4 @@
-# Better Todos road map
+# Better Todos route road map
 
 | url                 | description                   |
 |---------------------|-------------------------------|
