@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 import * as TodosAPI from "../services/TodosAPI";
 import { useEffect, useState } from 'react';
 import type { Todo } from '../types/Todo.types';
@@ -48,9 +48,12 @@ const TodoPage = () => {
     <h1>{todo.title}</h1>
     <p><strong>Status: </strong>{todo.completed ? "Completed" : "Not completed"}</p>
     <div className="button mb-3">
-
+    
 
     </div>
+    <Link to={"/todos"} className="btn btn-secondary" role="button">
+    &laquo; All todos
+    </Link>
 
     </>
   )
