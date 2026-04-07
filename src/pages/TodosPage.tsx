@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import Container from "react-bootstrap/Container";
 import AddTodoForm from "../components/AddTodoForm";
-import TodoCounter from "../components/TodoCounter";
-import TodoList from "../components/TodoList";
 import * as TodosAPI from "../services/TodosAPI";
 import type { Todo } from "../types/Todo.types";
 import "../assets/scss/App.scss";
+import { ListGroup } from "react-bootstrap";
+import { Link } from "react-router";
+import TodoCounter from "../components/TodoCounter";
 
 const TodosPage = () => {
 	const [todos, setTodos] = useState<Todo[] |null>(null);
@@ -70,16 +71,13 @@ const TodosPage = () => {
 		}
 	}
 
-	// Derive list of completed/incompleted todos from the `todos` state
-	const completedTodos = todos?.filter(todo => todo.completed) ?? [];
-	const incompleteTodos = todos?.filter(todo => !todo.completed) ?? [];
-
 	useEffect(() => {
 		// eslint-disable-next-line react-hooks/set-state-in-effect
 		getTodos();
 	}, []);
     return (
  <Container>
+	
 			<h1>Simple Todos</h1>
 
 			<AddTodoForm onAddTodo={handleAddTodo} />
@@ -91,23 +89,22 @@ const TodosPage = () => {
 
 			{todos && ( todos.length ? (
 				<>
-					<h2 className="h5 mb-2">💪🏻 Stuff I got to do</h2>
-          <TodoList 
-              onDelete ={handleDeleteTodo}
-              onToggle = {handleToggleTodo}
-              todos = {incompleteTodos}/>
+			<ListGroup className="todoList mb-4">
+				{todos.map(todo => 
+					<ListGroup.Item
+					action
+					as={Link}
+					className={todo.completed ? "completed" :""}
+					key={todo.id}
+					to={"/todos/" + todo.id}
+					>
+						<span className="todo-title">{todo.title}</span>
 
-					<h2 className="h5 mb-2">🥺 Stuff I've done</h2>
-          <TodoList 
-              onDelete ={handleDeleteTodo}
-              onToggle = {handleToggleTodo}
-              todos = {completedTodos}/>
-
-					<TodoCounter
-						completed={completedTodos.length}
-						total={todos.length}
-					/>
-				</>
+					</ListGroup.Item>
+				)}
+			</ListGroup>
+			<TodoCounter completed={todos.filter(todo => todo.completed).length} total={todos.length}/>
+			</>
 			) : (
 				<p>You ain't got no todos to do, time to party!!111 Untz untz untz 🥳!</p>
 			)

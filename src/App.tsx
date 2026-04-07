@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
 import TodosPage from "./pages/TodosPage";
 import Navigation from "./pages/partials/Navigation";
+import NotFoundPage from "./pages/NotFoundPage";
+import TodoPage from "./pages/TodoPage";
 
 
 
@@ -16,6 +18,8 @@ function App() {
 			<Routes>
 				<Route path="/" element= {<HomePage/>}/>
 				<Route path="/todos" element= {<TodosPage/>}/>
+				<Route path="todos/:id" element= {<TodoPage/>}/>
+				<Route path="*" element= {<NotFoundPage/>}/>
 			</Routes>
 		</Container>
 		</>
