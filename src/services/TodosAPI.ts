@@ -27,6 +27,16 @@ export const getTodos = async ()=> {
     return res.data;
 }
 
+/**
+ * 
+ * @param id 
+ * @returns gets a single todo
+ */
+export const getTodo = async (id: number) => {
+    const res = await axios.get<Todo>(BASE_URL + "/todos/" + id);
+    return res.data;
+}
+
 export const createTodos = async (payload:CreateTodoPayload)=> {
     const res = await axios.post<Todo>(BASE_URL + "/todos", payload);
     return res.data;
