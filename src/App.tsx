@@ -5,6 +5,7 @@ import TodosPage from "./pages/TodosPage";
 import Navigation from "./pages/partials/Navigation";
 import NotFoundPage from "./pages/NotFoundPage";
 import TodoPage from "./pages/TodoPage";
+import CreateTodoPage from "./pages/CreateTodoPage";
 
 
 
@@ -19,6 +20,7 @@ function App() {
 				<Route path="/" element= {<HomePage/>}/>
 				<Route path="/todos" element= {<TodosPage/>}/>
 				<Route path="todos/:id" element= {<TodoPage/>}/>
+				<Route path="/todos/create" element= {<CreateTodoPage/>}/>
 				<Route path="*" element= {<NotFoundPage/>}/>
 			</Routes>
 		</Container>

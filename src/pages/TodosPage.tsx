@@ -29,22 +29,6 @@ const TodosPage = () => {
 
 }
 
-	const handleAddTodo = async (title: string) => {
-		try{
-			const newTodo = await TodosAPI.createTodos({
-				title:title,
-				completed:false
-			});
-			console.log("created Todo yayy! Reloading todos...");
-
-			setTodos([...todos ?? [], newTodo])
-		} catch (err) {
-			console.error("Error thrown when creating Todo: ", err)
-      		setError( err instanceof Error ? "Could not create TODO" +err.message : "It's not me, it's you")
-       		setIsLoading(false);
-		}
-	}
-
 	const handleDeleteTodo = async (todo: Todo) => {
 		try{
 			await TodosAPI.deleteTodo(todo.id);
@@ -80,8 +64,6 @@ const TodosPage = () => {
 	
 			<h1>Simple Todos</h1>
 
-			<AddTodoForm onAddTodo={handleAddTodo} />
-
 			{error && <Alert variant="danger">{error}</Alert>}
 
       {isLoading && <p>Loading todo items</p>}
@@ -109,6 +91,7 @@ const TodosPage = () => {
 				<p>You ain't got no todos to do, time to party!!111 Untz untz untz 🥳!</p>
 			)
       )}
+	    <Link to={"/todos/create"} className="btn btn-primary" role="button">Do you have something that needs to be done?</Link>
 		</Container>
         )
 }
