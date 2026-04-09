@@ -23,12 +23,19 @@ function App() {
 				<Route path="/todos" element= {<TodosPage/>}/>
 				<Route path="todos/:id" element= {<TodoPage/>}/>
 				<Route path="/todos/create" element= {<CreateTodoPage/>}/>
-				<Route path="/todos/edit/:id" element= {<EditTodoPage/>}/>
+				<Route path="/todos/:id/edit" element= {<EditTodoPage/>}/>
 				<Route path="*" element= {<NotFoundPage/>}/>
 			</Routes>
 		</Container>
 
-		<ToastContainer/>
+		<ToastContainer
+		autoClose={3000}
+		closeOnClick={true}
+		limit={5}
+		newestOnTop={true}
+		position="top-right"
+		theme={"colored"}
+		/>
 		</>
 	);
 }

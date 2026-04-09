@@ -85,6 +85,11 @@ const TodoPage = () => {
 			onClick={() => handleToggleTodo(todo)}
 			variant="success"
         >Toggle completion</Button>
+
+        <Link className='btn btn-warning'
+        role='button'
+        to={`/todos/${todo.id}/edit`}>Edit</Link>
+
         <Button
 			onClick={() => handleDeleteTodo(todo)}
             

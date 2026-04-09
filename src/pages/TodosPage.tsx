@@ -18,7 +18,11 @@ const TodosPage = () => {
       try{
 		const data = await TodosAPI.getTodos();
 
-      setTodos(data);
+		const sortedTodos = data
+			.sort((a, b) => a.title.localeCompare(b.title))
+			.sort((a, b) => Number(a.completed) - Number(b.completed))
+
+      setTodos(sortedTodos);
       setIsLoading(false);
   } catch(err){
       console.error("getTodos error: ", err)
