@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import type { Todo } from '../types/Todo.types';
 import { Alert, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router";
+import { toast } from 'react-toastify';
 
 const TodoPage = () => {
     const [error, setError] = useState<string | false>(false);
@@ -33,6 +34,7 @@ const TodoPage = () => {
 
     	const handleToggleTodo = async (todo: Todo) => {
 		try{
+            setError(false);
 			const updatedTodo = await TodosAPI.updateTodos(todo.id,{
 				completed : !todo.completed
 			});
@@ -48,8 +50,11 @@ const TodoPage = () => {
 
     	const handleDeleteTodo = async (todo: Todo) => {
 		try{
-			await TodosAPI.deleteTodo(todo.id);
-            navigate("/todos")
+            const title = todo.title;
+			 await TodosAPI.deleteTodo(todo.id);
+
+             toast.success("Todo Item: " + title + " is deleted" )
+            navigate("/todos", {replace :true,})
 		} catch (err) {
 			console.error("Error thrown when deleting Todo: ", err)
       		setError( err instanceof Error ? "Could not delete TODO" +err.message : "It's not me, it's you")

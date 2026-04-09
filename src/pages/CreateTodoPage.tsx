@@ -6,12 +6,13 @@ import type { Todo } from '../types/Todo.types';
 import { Link } from 'react-router';
 
 const CreateTodoPage = () => {
-  const [todo, setTodo] = useState<Todo>();
+  const [todo, setTodo] = useState<Todo | null>(null);
   const [error, setError] = useState<string | false>(false);
 
   
     const handleAddTodo = async (title: string) => {
       try{
+        setTodo(null);
         const newTodo = await TodosAPI.createTodos({
           title:title,
           completed:false
@@ -22,6 +23,7 @@ const CreateTodoPage = () => {
       } catch (err) {
         console.error("Error thrown when creating Todo: ", err)
             setError( err instanceof Error ? "Could not create TODO" +err.message : "It's not me, it's you")
+        
       }
     }
   

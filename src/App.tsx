@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import TodoPage from "./pages/TodoPage";
 import CreateTodoPage from "./pages/CreateTodoPage";
 import EditTodoPage from "./pages/EditTodoPage";
+import { ToastContainer } from "react-toastify";
 
 
 
@@ -26,6 +27,8 @@ function App() {
 				<Route path="*" element= {<NotFoundPage/>}/>
 			</Routes>
 		</Container>
+
+		<ToastContainer/>
 		</>
 	);
 }
